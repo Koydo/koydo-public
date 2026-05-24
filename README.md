@@ -18,6 +18,8 @@ It does not contain production source code, private platform configuration, lear
 - Gab: https://gab.com/Koydo
 - Truth Social: https://truthsocial.com/@Koydo
 - Rumble: https://rumble.com/user/Koydo
+- Pinterest: https://www.pinterest.com/koydolearn/
+- Medium: https://medium.com/@koydolearn
 - GitHub organization: https://github.com/koydo
 
 ## What Koydo Is Building

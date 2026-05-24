@@ -12,6 +12,7 @@ It does not contain production source code, private platform configuration, lear
 - LinkedIn: https://www.linkedin.com/company/koydo
 - YouTube: https://www.youtube.com/@koydolearn
 - X: https://x.com/koydolearn
+- TikTok: https://www.tiktok.com/@koydolearn
 - Facebook: https://www.facebook.com/profile.php?id=61590434218280
 - GitHub organization: https://github.com/koydo
 

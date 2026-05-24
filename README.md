@@ -20,6 +20,8 @@ It does not contain production source code, private platform configuration, lear
 - Rumble: https://rumble.com/user/Koydo
 - Pinterest: https://www.pinterest.com/koydolearn/
 - Medium: https://medium.com/@koydolearn
+- Mastodon: https://mastodon.social/@koydo
+- Substack: https://substack.com/@koydo
 - GitHub organization: https://github.com/koydo
 
 ## What Koydo Is Building

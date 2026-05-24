@@ -14,6 +14,7 @@ It does not contain production source code, private platform configuration, lear
 - X: https://x.com/koydolearn
 - TikTok: https://www.tiktok.com/@koydolearn
 - Facebook: https://www.facebook.com/profile.php?id=61590434218280
+- Bluesky: https://bsky.app/profile/koydolearn.bsky.social
 - GitHub organization: https://github.com/koydo
 
 ## What Koydo Is Building

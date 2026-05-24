@@ -16,6 +16,8 @@ It does not contain production source code, private platform configuration, lear
 - Facebook: https://www.facebook.com/profile.php?id=61590434218280
 - Bluesky: https://bsky.app/profile/koydolearn.bsky.social
 - Gab: https://gab.com/Koydo
+- Truth Social: https://truthsocial.com/@Koydo
+- Rumble: https://rumble.com/user/Koydo
 - GitHub organization: https://github.com/koydo
 
 ## What Koydo Is Building

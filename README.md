@@ -10,6 +10,9 @@ It does not contain production source code, private platform configuration, lear
 
 - Website: https://www.koydo.app
 - LinkedIn: https://www.linkedin.com/company/koydo
+- YouTube: https://www.youtube.com/@koydolearn
+- X: https://x.com/koydolearn
+- Facebook: https://www.facebook.com/profile.php?id=61590434218280
 - GitHub organization: https://github.com/koydo
 
 ## What Koydo Is Building

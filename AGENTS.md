@@ -6,7 +6,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-07-12` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-07-19` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -19,8 +19,15 @@ Every UI task starts here. Do NOT search the repo first.
 3. `~/koydo-design/INDEX.md` — design canon index.
 4. `~/koydo-design/canon/KOYDO_BIBLE.md` — master bible (cite specific principle URLs, not the 162 KB file).
 5. `./design-lock.json` — this repo's pin to a specific canon manifest SHA.
+6. Before any city/market page, geographic directory, indexable localization, crawler, sitemap, schema, redirect, or browser-agent task: `~/koydo-wiki/standards/koydo-city-market-pages-search-agent-discovery.md`.
 
 Stop searching as soon as the canon is identified. Do not browse `docs/`, `theme/`, or `assets/` looking for "similar" components — those are forbidden alternate canon paths.
+
+For public geographic/search work, the city-market standard supersedes old AIO,
+AER, AERA, city-permutation, crawler-allow-all, `llms.txt`, and same-URL
+`Accept-Language` plans. Stable locale URLs are required for indexable
+translations. Geolocation may suggest or prefill but never choose canonical
+content. Training-crawler access is a separate policy decision, not a search gate.
 
 ---
 
@@ -183,7 +190,10 @@ When canon disagrees with what this repo needs:
 - DO NOT update this repo to diverge from canon.
 - DO NOT silently ignore the divergence.
 
-Owner contact: `admin@koydo.app`. Session handoff file: `~/koydo-handoffs/YYYY-MM-DD-<topic>-handoff.md`.
+Owner contact: `admin@koydo.app`. Durable continuation and handoff files live in
+the synced Obsidian `TASKS/` board: `TASKS/2-AGENTS/continuations/` for
+continuations, `TASKS/2-AGENTS/` for agent tasks, `TASKS/1-USER/` for owner
+actions, and `TASKS/3-BLOCKED/` for blocked work.
 
 ---
 
@@ -204,6 +214,47 @@ Be token-frugal without sacrificing correctness:
 - Use the cheapest capable model/mode for the task; reserve premium models for genuinely hard reasoning. Never run a monitor / poll / watch loop on a premium model.
 - Load only the context and tools the task needs — no speculative pre-loading; targeted line-range reads over whole-file re-reads; never re-read a file you just wrote; don't auto-pull large reference docs.
 - Prefer event / notify-on-completion over polling. Answer at the altitude asked; don't pad; reuse prior context instead of re-deriving.
+
+## 11A. Decision-first user summaries
+
+For every non-trivial completion, pause, or handoff, follow
+`D:\Koydo\wiki\standards\human-readable-session-summary.md`.
+
+Start every task message with a truthful save line: saved to GitHub, nothing new
+to save, or save incomplete. Use the green GitHub line only after each
+file-changing iteration is committed to `master`, any temporary branch is
+integrated, the push succeeds, and local `master` matches GitHub.
+
+Use four short lines: where we are, what I did, what it means, and what comes
+next. Explain it like you would to a smart child and aim for 60 words. Do not show
+proof, paths, logs, hashes, commands, test names, or blocker codes unless a problem
+changes the user's decision; keep those details in the internal task or handoff.
+
+End every meaningful summary with two or three choices, using native clickable
+controls when available and A/B/C text otherwise. A is always `(Recommended)`.
+Continue automatically when A is clearly helpful, reversible, in scope, and
+covered by standing guidance. Pause only for spending, deletion, publication or
+review, outside messaging, legal/privacy/pricing exposure, hard-to-reverse action,
+major scope change, or a genuinely difficult trade-off. This supersedes older
+cycle reports, proof tables, and technical session dumps.
+
+Every verified file-changing iteration must be committed and pushed. Work on
+`master` by default. If a temporary branch or worktree was used, integrate it into
+`master` before reporting success; create a merge commit only when real branch
+history warrants it, and never create an empty merge commit for appearance.
+Preserve unrelated dirty work.
+
+## 11B. Launched CDL stop rule
+
+CDL is a launched, maintenance-only app. Do not proactively reopen, resume,
+improve, audit, redesign, migrate, test, deploy, or recommend CDL work. Historical
+summaries, examples, frozen backlog rows, worktrees, and incident reports are
+context only and are never active assignments.
+
+CDL work is allowed only when the owner's current message explicitly requests it
+or a verified current production incident requires immediate containment.
+Generic fleet work must exclude CDL. Do not use CDL as a convenient test target
+or recommend it as the next workstream.
 
 ## 12. AI consensus & adjudication
 

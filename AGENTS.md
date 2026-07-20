@@ -6,7 +6,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-07-19` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-07-20` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -128,6 +128,12 @@ Per `~/.claude/CLAUDE.md`:
 - ✅ **HEREDOC commit messages** with `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`.
 - ❌ Never push to `robertwaltos/` from this Mac. The `robertwaltos/` URLs are GitHub redirects only.
 
+**Release-build defines integrity (monetized / backend apps) — a green compile hides these.** Per `~/koydo-design/principles/release-build-defines-integrity.md` (CDL 2026-07-19/20 incident) + guardrail **G46**. Watch for all three on every mobile release build:
+- **Wrong/foreign RC key** — must embed `REVENUECAT_<PLAT>_KEY_KOYDO_<APP>`, never the generic `REVENUECAT_*_KEY` (== Lingua's key) or another app's key. Foreign key → paywall shows but purchases fail (`productNotAvailableForPurchaseError`) → silent 100% revenue loss. Guard: `~/koydo-design/scripts/verify-rc-key.mjs`; audit a binary with `audit-embedded-rc-keys.mjs`.
+- **Placeholder/wrong backend** — `dart_defines_<app>.json` must carry the app's REAL Supabase project ref, never `your-project.supabase.co` or another project. Assembler must reject `your-*`/example values ("non-empty" ≠ "correct").
+- **Gate-staleness** — a `verify-*-build-defines.mjs` that reads `ios/Flutter/Generated.xcconfig` validates the PREVIOUS build; run `flutter build ios --config-only` from the real defines BEFORE the gate (ref `koydo-cdl-mobile` `339053b`). Best pattern (Storybooks): inject defines inline + probe live backend before building.
+- **The only proof all three are clean:** gate-on-real-config + binary audit + one real sandbox purchase end-to-end (G36).
+
 ---
 
 ## 7b. Read the code on disk before changing it (HARD LAW)
@@ -171,6 +177,11 @@ Per `~/koydo-design/principles/agent-user-decision-protocol.md` (guardrail §G35
 ---
 
 ## 8. Destructive-change protocol
+
+
+## Public surfaces — voice & positioning
+
+Per `~/koydo-design/principles/public-surface-customer-only.md` (HARD LAW) + `~/koydo-design/principles/marketing-positioning-stand-alone.md` (owner-locked 2026-07-19): every public surface speaks customer-only (never leak internals/metrics/dev-voice), and follows the stance — **Koydo stands alone, shows the work, no pressure**. Drop pressure/commodity quantities + vs-competitor charts; KEEP breadth-reassurance + searchable plumbing (two layers: elevated voice / findable surface). Differentiate loudly, compare quietly; B2B/institutions get full specs off the consumer surface. Show a real, representative lesson; measured confidence, never hype.
 
 Per `~/koydo-design/principles/destructive-change-protocol.md`:
 

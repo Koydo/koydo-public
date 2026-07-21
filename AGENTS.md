@@ -6,7 +6,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-07-20` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-07-21` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -16,8 +16,8 @@ Every UI task starts here. Do NOT search the repo first.
 
 1. `~/.claude/CLAUDE.md` — user's global standing rules (Claude reads this automatically; non-Claude agents: read it explicitly).
 2. **This file (`AGENTS.md`)** — repo-local rules and canon pin.
-3. `~/koydo-design/INDEX.md` — design canon index.
-4. `~/koydo-design/canon/KOYDO_BIBLE.md` — master bible (cite specific principle URLs, not the 162 KB file).
+3. `~/koydo-design/AGENT_CHARTER.md` — **THE unified agent framework** (v3.0, 2026-07-21; guardrail G49): §0 precedence, §1 the Loop, §2 product laws (stack-by-benefit, KAS/KAR/Design triad, navigation never-lost, settings-screen standard, purchase parity, 5M-DAU scale floor, art search-before-create), §4 ops laws. The charter wins on conflict. (`canon/KOYDO_BIBLE.md` is provenance only — cite principles, not the Bible.)
+4. `~/koydo-design/INDEX.md` — design canon index. The sole Koydo mark is the **lowercase `koydo` wordmark** (amber pill retired, Tree deleted — never resurrect).
 5. `./design-lock.json` — this repo's pin to a specific canon manifest SHA.
 6. Before any city/market page, geographic directory, indexable localization, crawler, sitemap, schema, redirect, or browser-agent task: `~/koydo-wiki/standards/koydo-city-market-pages-search-agent-discovery.md`.
 
@@ -82,8 +82,8 @@ koydo-<scope>-<app>[-<locale>]-<surface>-<descriptor>[-<size>][-<density>][-<ver
 ```
 
 `<scope>` ∈ `{brand, app, category-<tier>}`. Examples:
-- `koydo-brand-wordmark-primary.canon.svg`
-- `koydo-app-cdl-en-landing-hero-truck-sunrise-v1.canon.webp`
+- `koydo-wordmark-lowercase-fredoka-semibold.canon.1af34b446c0b.svg`
+- `koydo-app-lingua-en-landing-hero-lantern-harbor-v1.canon.webp`
 - `koydo-category-junior-mascot-fennec-wave-v1.canon.webp`
 
 Platform-mandated exceptions: `AppIcon.appiconset/`, `ic_launcher*` in Android mipmap dirs, `favicon.ico` at web root.
@@ -124,11 +124,12 @@ If canon advances and this repo is out of sync, run the relevant `sync-*.mjs` BE
 Per `~/.claude/CLAUDE.md`:
 
 - ✅ **Commit + push on every task completion** to `origin/master` (Koydo/ org only).
-- ❌ **No cloud builds.** No `vercel build` triggering deploys, no GitHub Actions builds/tests/deploys, no cloud cron. All builds, tests, lints, codegen run locally.
-- ✅ **HEREDOC commit messages** with `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`.
+- ❌ **No cloud builds.** No GitHub Actions builds/tests/deploys, no cloud cron. All builds, tests, lints, codegen run locally.
+- ✅ **ONE deploy law:** local `vercel build` → `vercel deploy --prebuilt --archive=tgz` (standing approval) → production via `vercel alias set` = **owner-go**. Narrow owner carve-out 2026-06-18: production-scoped-env apps may `vercel build --prod` + `vercel deploy --prebuilt --prod` (`~/Koydo/wiki/standards/no-cloud-builds.md`). The 2026-06-19 blanket freeze was lifted 2026-07-21.
+- ✅ **HEREDOC commit messages** with `Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>`.
 - ❌ Never push to `robertwaltos/` from this Mac. The `robertwaltos/` URLs are GitHub redirects only.
 
-**Release-build defines integrity (monetized / backend apps) — a green compile hides these.** Per `~/koydo-design/principles/release-build-defines-integrity.md` (CDL 2026-07-19/20 incident) + guardrail **G46**. Watch for all three on every mobile release build:
+**Release-build defines integrity (monetized / backend apps) — a green compile hides these.** Per `~/koydo-design/principles/release-build-defines-integrity.md` (CDL 2026-07-19/20 incident) + guardrail **G46-B** (per-app RC key pinned by hash; IDs suffixed 2026-07-21). Watch for all three on every mobile release build:
 - **Wrong/foreign RC key** — must embed `REVENUECAT_<PLAT>_KEY_KOYDO_<APP>`, never the generic `REVENUECAT_*_KEY` (== Lingua's key) or another app's key. Foreign key → paywall shows but purchases fail (`productNotAvailableForPurchaseError`) → silent 100% revenue loss. Guard: `~/koydo-design/scripts/verify-rc-key.mjs`; audit a binary with `audit-embedded-rc-keys.mjs`.
 - **Placeholder/wrong backend** — `dart_defines_<app>.json` must carry the app's REAL Supabase project ref, never `your-project.supabase.co` or another project. Assembler must reject `your-*`/example values ("non-empty" ≠ "correct").
 - **Gate-staleness** — a `verify-*-build-defines.mjs` that reads `ios/Flutter/Generated.xcconfig` validates the PREVIOUS build; run `flutter build ios --config-only` from the real defines BEFORE the gate (ref `koydo-cdl-mobile` `339053b`). Best pattern (Storybooks): inject defines inline + probe live backend before building.
@@ -229,7 +230,7 @@ Be token-frugal without sacrificing correctness:
 ## 11A. Decision-first user summaries
 
 For every non-trivial completion, pause, or handoff, follow
-`D:\Koydo\wiki\standards\human-readable-session-summary.md`.
+`~/Koydo/wiki/standards/human-readable-session-summary.md`.
 
 Start every task message with a truthful save line: saved to GitHub, nothing new
 to save, or save incomplete. Use the green GitHub line only after each

@@ -296,3 +296,55 @@ It fans the value out to ENV.md, both Supabase projects, every Vercel project ho
 - ✅ **When a "no plans/products available" bug is reported, verify server-side FIRST** (the payment provider's API, App Store Connect / Play Console product state) before touching client code.
 
 Trigger incident: `koydo-cdl-mobile`, 2026-07-06 — RevenueCat was never configured in an entire night's builds (a missing dart-define), invisible until a paywall gate made it block every user; a verification script that would have caught it instantly existed the whole session and was never run. Full standard: `~/Koydo/wiki/standards/subscription-revenue-path-verification.md`. Guardrail: `TASKS/0G-SHARED-GUARDRAILS--ALL-AGENTS.md` G36.
+
+---
+
+## 🔦 ACTIVITY LIGHTHOUSE — ~530 ACTIVITIES ALREADY EXIST AND ARE LIVE (owner-locked 2026-07-23)
+
+> **STOP REDISCOVERING THEM.** This has cost multiple full sessions. Before ANY answer about
+> what content/activities/games Koydo has — or ANY plan to "build activities" — read
+> **`~/koydo-brain/codebase/KOYDO-LIVE-SURFACE-AND-ACTIVITY-INVENTORY.md`** and **Charter §2.17**.
+
+⛔ **A `content_registry` count is ALWAYS WRONG and ALWAYS UNDERCOUNTS.** Most Koydo activities are
+separate Next.js apps on their own domains, or Dart packages — they appear in **no** database query
+and **no** single route list. That is the exact mechanism by which they vanish every session.
+
+**Verified live by HTTP probe 2026-07-23:**
+
+| Source | Count |
+|---|---|
+| `activities.koydo.app` (`koydo-activities`) | **357** |
+| `games.koydo.app` (`koydo-games`) | **47** |
+| `microapps.koydo.app` (`koydo-microapps`) | **32** |
+| **`koydo-mobile/packages/` Flutter activity packages** | **66** |
+| `art-studio.koydo.app` + ~30 more live activity domains | 30+ |
+| **Live `*.koydo.app` surfaces** | **97** |
+| **≈ 530+ distinct activities/games/apps** | |
+
+**The 66 Flutter packages are the ones that keep being forgotten** — `koydo_parity_*` alone is
+**39 named activities** (melody_meadow · skip_count_market · tiny_zoo · forensics_lab ·
+together_drawing · cloud_kingdom · senses_safari …), plus 8 `koydo_bundle_*`, 4 `koydo_flagship_*`,
+4 `koydo_creative_*`, 2 `koydo_longtail_*`, and 9 novel learning-method engines.
+
+**Also unsurfaced INSIDE the database:** `/study` queries only `kind='lesson'` + `activity_widget`,
+so **`story_script` (155 sprouts / 315 junior)** and the **`songs` table (4,140)** render NOWHERE.
+Sprouts truly has 392 active pieces while its teaser reads "250+".
+
+**Do not confuse drafts with loss:** sprouts has **533 `activity_widget` rows at `status='draft'`** —
+the **BANNED mechanical re-skins** from the 501→209 prune. **Never un-draft them to inflate a count.**
+
+### THE RULE
+To answer "what content/activities do we have", count **ALL FOUR**:
+1. `content_registry` **by `kind`** (not just `lesson`)
+2. the `songs` table
+3. `activities` + `games` + `microapps` + `art-studio` (+ ~30 live domains)
+4. `koydo-mobile/packages/` Flutter activity packages
+
+**The gap is SURFACING, not content.** ~530 activities are shipped and reachable, and no age-tier
+landing page links to any of them. **Never rebuild what already exists.**
+
+Re-sweep command:
+```sh
+ls -d ~/koydo-*/ | sed 's|.*/koydo-||;s|/$||' | sort -u \
+  | xargs -P 24 -I{} sh -c 'c=$(curl -s -o /dev/null -w "%{http_code}" --max-time 6 https://{}.koydo.app/); [ "$c" = 200 ] && echo {}'
+```

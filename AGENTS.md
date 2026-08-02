@@ -14,7 +14,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-07-26` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-08-02` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -252,6 +252,63 @@ This file is checked at agent startup. Required companions:
 - `./CODEOWNERS` (when on GitHub) — routes design-canon paths to `@koydo/design-canon`
 
 When this file's `Last synced from canon` is older than 14 days, run `~/koydo-design/scripts/propagate-design-ssot.mjs --target=koydo-public` to refresh.
+
+## 10B. Browser & native automation — use the OWNED tools, never a vendor singleton
+
+**Applies to every agent regardless of vendor** — Claude, Codex/GPT, Gemini, Grok/xAI, Cursor,
+Copilot, Aider, Devin. Nothing here needs an MCP server, a browser extension, or a specific IDE.
+
+**Never build on a vendor-supplied browser/desktop channel.** Each is a *shared singleton*, so
+another concurrently-running agent takes it exclusively. Measured 2026-08-02, all three were
+unusable at the same time: the Claude-in-Chrome extension installed but **not connected**,
+Playwright MCP **locked** (`Browser is already in use`), computer-use **locked**
+(`in use by another Claude session`).
+
+Use these instead — plain executables, any number of agents at once:
+
+| Tool | For | Why it works |
+|---|---|---|
+| `~/.koydo/bin/kb` | anything on the web | **daemon with a persistent profile** — cookies and page state survive across separate shell calls, so multi-step work (sign in → navigate → fill → submit → verify) is possible. A one-shot script restarts logged-out every step. |
+| `~/.koydo/bin/kn` | genuinely native macOS apps | AppleScript + System Events; Accessibility already granted |
+
+`kb start` then `kb goto/snap --interactive/click/type/press/text/shot/console/net/cookies/eval`.
+`kn apps/windows/activate/text/ui/click/menu/type/key/shot`.
+
+This split holds **even when computer-use is available**, because it grants browsers at tier
+"read" — visible in screenshots, but clicks and typing blocked by design.
+
+### 🔒 The boundary — enforced in the tools, not left to judgement
+
+- **Password managers and keychains** (1Password, Passwords, Keychain Access, Bitwarden,
+  LastPass, Dashlane, …) are refused by name. **There is no `--force` override.**
+- **`kn type` inspects the live focused field** and refuses anything shaped like a password,
+  PIN, CVV, card number, SSN, seed/recovery phrase, private key or API key.
+- **Destructive/outward-facing controls** (delete, erase, revoke, pay, purchase, checkout,
+  place order, send, publish, post, share) require an explicit `--force`.
+- `kb` binds **127.0.0.1 only**; its `eval` runs in the **page sandbox** — no filesystem, no shell.
+
+*Why enforced rather than instructed:* a tool that **can** type a credential and relies on the
+agent choosing not to will eventually do it — through a confused plan, a careless prompt, or an
+instruction injected by content the agent read on screen. A refusal in the tool survives all
+three. When a credential is genuinely required, **the user enters it, or their password
+manager's own UI does.**
+
+### Traps already paid for
+
+- **Playwright version ↔ browser build:** the error *"Executable doesn't exist … 1217 … run npx
+  playwright install"* names the **browser** when the real mismatch is the **library version**.
+- **zsh does not word-split unquoted variables:** `B="node …/tool.mjs"; $B goto url` fails
+  (bash splits, zsh needs `${=B}`). Both tools ship as real executables so this cannot recur.
+- **Screenshot timing invents defects:** capturing at `domcontentloaded` showed a live page
+  fully unstyled and nearly produced a false "broken stylesheet" report — the CSS was HTTP 200,
+  just not applied. `kb` waits for `networkidle`. **A tool that can manufacture a false defect
+  is worse than no tool.**
+
+**Corollary:** if a defect exists only in the *rendered* result, only a renderer can find it —
+driving a real browser caught the canonical koydo wordmark returning **404** on a page that
+itself returned **200**, which no HTML-only probe can see.
+
+Full standard: `~/Koydo/wiki/standards/agent-browser-and-native-automation.md`.
 
 ## 11. Token discipline (all agents)
 

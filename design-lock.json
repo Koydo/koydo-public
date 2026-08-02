@@ -1,10 +1,10 @@
 {
   "$schema": "https://koydo-design.koydo.app/schemas/design-lock.schema.json",
-  "lockedAt": "2026-08-02T08:12:03.550Z",
+  "lockedAt": "2026-08-02T23:51:38.071Z",
   "lockedBy": "propagate-agents-md@mac-mini",
   "synced": {
     "site-footer": {
-      "manifestSha": "sha256:17d5e5639cadbae6107314f5770aba9f35bdf4097e20ff79a2fd1d122e34ceae",
+      "manifestSha": "sha256:bd2a36dfdb712f4143d70711f4e81f62ebb23bccdc33bbeb6fef50c93509f650",
       "consumerPath": "src/components/koydo-footer/",
       "syncScript": "sync-koydo-footer.mjs",
       "version": "1.5.0"

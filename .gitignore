@@ -1,0 +1,8 @@
+
+# Local env files — ALL of them. The narrow list (.env, .env.local, .env.*.local) does not
+# match .env.build / .env.pull / .env.vercel-check / .env.production.batch, which is how a
+# live service-role key reached a pushed branch. Templates stay tracked via the ! lines.
+.env*
+!.env.example
+!.env.sample
+!.env.template

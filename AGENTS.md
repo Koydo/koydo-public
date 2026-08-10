@@ -15,7 +15,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-08-08` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-08-09` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -364,6 +364,21 @@ CDL work is allowed only when the owner's current message explicitly requests it
 or a verified current production incident requires immediate containment.
 Generic fleet work must exclude CDL. Do not use CDL as a convenient test target
 or recommend it as the next workstream.
+
+## 11C. AI model selection — evidence, not provider preference
+
+Before changing or recommending any AI provider, model, primary, fallback,
+route, price, runtime enablement, or lock, use `$koydo-ai-model-governance` and
+inspect the exact task surface in
+`~/koydo-design/registry/ai-model-registry.json`. Stage a task-specific evidence
+receipt before committing. No universal provider/model ranking is allowed:
+selection is the cheapest eligible route that completes every real input under
+the surface's capability, safety, latency, and lock constraints. The canonical
+commit hook runs
+`node ~/koydo-design/scripts/ai-model-governance.mjs check --repo <repo> --staged`
+and blocks unsupported placement, missing real-input proof, stale pricing, and
+lock bypass. Full contract:
+`~/koydo-design/principles/ai-model-selection.md`.
 
 ## 12. AI consensus & adjudication
 

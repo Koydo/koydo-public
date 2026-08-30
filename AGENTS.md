@@ -15,7 +15,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-08-09` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-08-30` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -173,7 +173,7 @@ Per the Charter and `principles/autonomous-agent-execution.md`:
 
 ---
 
-## 7b. Read the code on disk before changing it (HARD LAW)
+## 7b. Read the code on disk before changing it — and before asserting it (HARD LAW)
 
 Per `~/koydo-design/principles/read-code-before-changing.md`:
 
@@ -181,6 +181,17 @@ Per `~/koydo-design/principles/read-code-before-changing.md`:
   Acting from memory, a filename, an assumption about "what the scaffold
   contains", or a stale summary is forbidden. If you didn't read it, you don't
   know what it says — and you may not change it.
+- **A brief is a pointer, never a fact (guardrail G57, owner-directed 2026-08-16).**
+  Never state, file, or act on a factual claim about code, config, a schedule, a
+  schema, or a served page without reading the deciding primary source this
+  session — the code path on disk, the live DB (never `schema.sql`; it drifts),
+  the served body, the provider API. Briefs, registries, filed tasks, and sibling
+  reports only point at where to read. An orchestrator's brief must name its
+  primary sources; a lane's read-back must verify the brief's central premises
+  against them before acting. Surface scans (grep hit counts, name matching,
+  presence checks) never substantiate a claim; verify state by re-reading it,
+  never by exit code. CONFIRMED = primary source read this session; anything
+  else is INFERRED and must say so.
 - **Read canon before citing it.** Open the actual principle/ADR in
   `~/koydo-design` before applying it. The canon must be **present on disk**; if
   `~/koydo-design` is missing, restore it before proceeding — never work around
@@ -201,14 +212,16 @@ Per `~/koydo-design/principles/agent-user-decision-protocol.md` (guardrail §G35
   chose and why. Bias to action — this is a full-automation operation. "Best" = best
   user UX/UI × maximizes Koydo revenue + growth.
 - **Ask only the ~10% that genuinely need the owner:** spend (G28), store submit/publish
-  (G34), pricing/commercial terms (even-dollar, G31), legal/compliance exposure,
+  (G34), pricing/commercial terms (cross-channel parity, G31), legal/compliance exposure,
   irreversible/hard-to-reverse consequential actions, or a genuinely ambiguous fork.
-- **When you ask, use an MCQ:** one clear question → answers **A/B/C/D where A is ALWAYS
-  your recommendation** (one-line why) → B/C/D are the real alternatives, each with its
-  trade-off → the owner picks a letter. Delivery = the `AskUserQuestion` tool, option A
-  first + "(Recommended)".
-- Never ask what you can **verify yourself** (URL 200? key live? schema?). Batch related
-  asks. Never re-litigate a settled decision. Record consequential calls
+- **When you ask, use an MCQ:** exactly **one question per turn** → answers **A/B/C/D
+  where A is ALWAYS your recommendation** (one-line why) → B/C/D are the real
+  alternatives, each with its trade-off. Use the platform's native clickable question
+  control whenever available; text is fallback only when the interface has no such tool.
+  Wait for the owner's answer, record and apply it, and only then ask the next question.
+  Never batch two questions in one message or one question-control call.
+- Never ask what you can **verify yourself** (URL 200? key live? schema?). Never
+  re-litigate a settled decision. Record consequential calls
   (pricing/spend/scope/legal/launch) to `TASKS/1-USER`.
 
 ---
@@ -353,17 +366,18 @@ Every verified file-changing iteration must be committed and pushed. Work on
 history warrants it, and never create an empty merge commit for appearance.
 Preserve unrelated dirty work.
 
-## 11B. Launched CDL stop rule
+## 11B. Targeted launched-app source policy
 
-CDL is a launched, maintenance-only app. Do not proactively reopen, resume,
-improve, audit, redesign, migrate, test, deploy, or recommend CDL work. Historical
-summaries, examples, frozen backlog rows, worktrees, and incident reports are
-context only and are never active assignments.
+Policy `owner-repository-recovery-execution-2026-08-21` authorizes deliberate,
+whole-repository claimed source work for the independently verified active build
+sources of exact bundle IDs `app.koydo.cdl`, `app.koydo.cdl.es`, and
+`app.koydo.storybooks`. Run all real local gates, stage only owned paths, and
+prove local/tracking/live-remote SHA parity.
 
-CDL work is allowed only when the owner's current message explicitly requests it
-or a verified current production incident requires immediate containment.
-Generic fleet work must exclude CDL. Do not use CDL as a convenient test target
-or recommend it as the next workstream.
+This does not authorize generic fleet fan-out into any `koydo-cdl*` tree, a
+different locale or duplicate source, Lingua/Academia work, payment, credential
+rotation, destructive data, store submission/rollout, production promotion or
+alias, or traffic changes. Each gated action retains its own owner question.
 
 ## 11C. AI model selection — evidence, not provider preference
 

@@ -15,7 +15,7 @@
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-08-30` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-09-06` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -203,26 +203,26 @@ Per `~/koydo-design/principles/read-code-before-changing.md`:
 
 ---
 
-## 7c. User decisions — default to action; ask only the high-stakes 10%
+## 7c. Owner orchestration — agents operate; the owner directs the company
 
 Per `~/koydo-design/principles/agent-user-decision-protocol.md` (guardrail §G35):
 
-- The owner picks the recommended option ~90% of the time. **Default: decide the
-  vision-and-revenue-optimal action yourself and DO it**, then state in one line what you
-  chose and why. Bias to action — this is a full-automation operation. "Best" = best
-  user UX/UI × maximizes Koydo revenue + growth.
-- **Ask only the ~10% that genuinely need the owner:** spend (G28), store submit/publish
-  (G34), pricing/commercial terms (cross-channel parity, G31), legal/compliance exposure,
-  irreversible/hard-to-reverse consequential actions, or a genuinely ambiguous fork.
-- **When you ask, use an MCQ:** exactly **one question per turn** → answers **A/B/C/D
-  where A is ALWAYS your recommendation** (one-line why) → B/C/D are the real
-  alternatives, each with its trade-off. Use the platform's native clickable question
-  control whenever available; text is fallback only when the interface has no such tool.
-  Wait for the owner's answer, record and apply it, and only then ask the next question.
-  Never batch two questions in one message or one question-control call.
-- Never ask what you can **verify yourself** (URL 200? key live? schema?). Never
-  re-litigate a settled decision. Record consequential calls
-  (pricing/spend/scope/legal/launch) to `TASKS/1-USER`.
+- **Default: decide and execute.** Agents own tools, architecture, implementation,
+  files, tests, retries, and every discoverable or reversible technical choice. Never
+  ask for routine approval, a periodic “go,” or what to prioritize when all lanes can run.
+  No periodic approval check-ins.
+- **The owner receives company-level forks only:** capital/spend; market, portfolio,
+  product, pricing, or commercial direction; public/store release or production traffic;
+  legal/irreversible exposure; or a material mutually exclusive trade-off canon and
+  evidence cannot settle.
+- **Exactly one native-clickable question per turn.** A is `(Recommended)` and optimizes
+  durable revenue plus land-grab share through peak product quality. Record and apply the
+  answer before asking another; never re-ask a recorded decision.
+- **No text-menu fallback.** If the interface lacks a native clickable control, continue
+  all ungated work and pause only the exact owner-gated action until a clickable-capable
+  surface is available.
+- **`grill me` / `quiz me` starts a serial owner-orchestration interview**, never a
+  knowledge quiz. Recon removes every question the agent can answer itself first.
 
 ---
 
@@ -337,28 +337,21 @@ Be token-frugal without sacrificing correctness:
 - Load only the context and tools the task needs — no speculative pre-loading; targeted line-range reads over whole-file re-reads; never re-read a file you just wrote; don't auto-pull large reference docs.
 - Prefer event / notify-on-completion over polling. Answer at the altitude asked; don't pad; reuse prior context instead of re-deriving.
 
-## 11A. Decision-first user summaries
+## 11A. Short owner-altitude summaries
 
 For every non-trivial completion, pause, or handoff, follow
 `~/Koydo/wiki/standards/human-readable-session-summary.md`.
 
-Start every task message with a truthful save line: saved to GitHub, nothing new
-to save, or save incomplete. Use the green GitHub line only after each
-file-changing iteration is committed to `master`, any temporary branch is
-integrated, the push succeeds, and local `master` matches GitHub.
+Lead with the outcome. State what was verified and what genuinely remains in one
+line per lane or at most five bullets. Keep proof, paths, logs, hashes, commands,
+and receipts in the internal task unless a problem changes the owner's decision.
 
-Use four short lines: where we are, what I did, what it means, and what comes
-next. Explain it like you would to a smart child and aim for 60 words. Do not show
-proof, paths, logs, hashes, commands, test names, or blocker codes unless a problem
-changes the user's decision; keep those details in the internal task or handoff.
+Do not force a save-line, four-heading script, next-step list, or MCQ into every
+update. Normal checkpoints are progress telemetry, not steering polls. Continue
+autonomously whenever no genuine owner gate exists. If nothing remains, stop cleanly.
 
-End every meaningful summary with two or three choices, using native clickable
-controls when available and A/B/C text otherwise. A is always `(Recommended)`.
-Continue automatically when A is clearly helpful, reversible, in scope, and
-covered by standing guidance. Pause only for spending, deletion, publication or
-review, outside messaging, legal/privacy/pricing exposure, hard-to-reverse action,
-major scope change, or a genuinely difficult trade-off. This supersedes older
-cycle reports, proof tables, and technical session dumps.
+Only a genuine company-level fork ends with a question, and that question uses the
+native clickable control under §7c. Never render a text menu or request routine approval.
 
 Every verified file-changing iteration must be committed and pushed. Work on
 `master` by default. If a temporary branch or worktree was used, integrate it into

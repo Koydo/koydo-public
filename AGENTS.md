@@ -10,12 +10,14 @@
 > Do not guess or stop at a search hit. Resolve uncertainty through canon, code, consumers, Git, runtime,
 > and provider state; proceed on reversible in-scope work and ask only for a genuine owner-only fork.
 
+> **Every session and final response:** use the Vault `TASKS/` card and `CLAIMS.md` as the fleet workboard source; append a dated checkpoint with source/artifact, verification, next gate, and worktree status. On the Mac, run `python3 ~/koydo-design/tools/workboard/checkpoint.py --help`. Resume one claimed copy per task; push verified slices to `master` promptly. Remove only finished, clean, remote-backed-up worktrees after exact destructive-change approval and independent checks. See Charter §00.8.
+
 > Provider-neutral cross-agent design + governance contract. The Charter and autonomous-execution principle are canonical; provider-specific files are adapters only. Keep this file in sync.
 
 **Repo:** `koydo-public`
 **Repo type:** `content`
 **Origin:** `https://github.com/Koydo/koydo-public.git`
-**Last synced from canon:** `2026-09-06` (manifest sha: see `design-lock.json`)
+**Last synced from canon:** `2026-10-04` (manifest sha: see `design-lock.json`)
 
 ---
 
@@ -223,6 +225,49 @@ Per `~/koydo-design/principles/agent-user-decision-protocol.md` (guardrail §G35
   surface is available.
 - **`grill me` / `quiz me` starts a serial owner-orchestration interview**, never a
   knowledge quiz. Recon removes every question the agent can answer itself first.
+- **Every owner decision uses the grilling method (Charter v6.15, owner-locked 2026-09-23).**
+  Map a design tree, recon every fact yourself, then walk the open frontier one clickable
+  question per turn labelled `Q<n> of <N>`, plain language, A `(Recommended)` first, 2–4
+  options each with a one-line consequence; never batch. Continue until the frontier is
+  empty and confirm shared understanding before acting. Skills: `skills/grilling/` +
+  `skills/grill-me/` in koydo-design; detail in `principles/agent-user-decision-protocol.md` §5A.
+
+---
+
+## 7d. The Consensus Mandate — consequential decisions are made by a panel (Charter §00.7, owner-directed 2026-09-26)
+
+Per `~/koydo-design/principles/consensus-governed-decisions.md` (guardrail G59; map
+`~/koydo-design/registry/consensus-decision-classes.json`):
+
+- **Classify before acting.** **D0** routine or mechanical: decide after the Lens Check in
+  your own reasoning. **D1** customer-affecting and reversible: In-Session Panel (four
+  independent lens reviewers: Law & Compliance, Safety & Trust, Customer, Revenue; plus a
+  Critic; no metered spend). Any pricing, packaging, trial, renewal or cancellation
+  recommendation is D2. **D2** consequential:
+  the cross-vendor Decision Roundtable (`@koydo/ai-consensus`). **D3** high-stakes,
+  irreversible or company-level: the High-Stakes Roundtable, then the owner's gate. The
+  highest matching tier wins; if unsure, take the higher.
+- **The decision function, in order:** lawful everywhere it applies → safe, honest and
+  trustworthy (both hard constraints, fail closed) → happy customers who come back, retail
+  and organizational (this gates revenue) → revenue, direct and tangential (improve first;
+  new features are revenue decisions) → the Koydo vision (Charter §00.6, internal only).
+- **Law lens every time:** audience → jurisdictions → channel → data → platform/contract →
+  regimes verified live with the date → `lawful` / `lawful_with_conditions` /
+  `unlawful_or_unverified` (fails closed). Consensus is the gate (G45); never tell the owner
+  to hire counsel.
+- **Spend:** paid roundtables spend only against the owner's Standing Consensus Budget ($50 per
+  month, set 2026-09-26). No agent grants "small" spend. **When the budget runs close (80% used,
+  or the next panel will not fit), ask the owner to raise the funding in one clickable question;
+  never silently skip, downgrade or park the panel.** No call ever goes past the current cap.
+- **Consensus prepares; the owner decides.** It never overrides a Charter §00.2 gate, never
+  authorizes spend, price, publication or traffic, never overturns a canon ban, and never
+  replaces runtime verification. For owner-gated forks, the panel's verdict is option A
+  `(Recommended)`.
+- **Helpful Next Step (Charter §2.39):** every adult interaction may end with one soft,
+  dismissible, honest next step. Children never see an offer; it goes to the parent area.
+  Support and cancellation stay free of selling. Dark patterns are banned.
+- **Record it:** a consensus record in the task card or ADR, plus a commit trailer
+  `Consensus: <tier> <state> <record>`.
 
 ---
 

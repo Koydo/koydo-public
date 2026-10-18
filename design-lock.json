@@ -1,19 +1,21 @@
 {
   "$schema": "https://koydo-design.koydo.app/schemas/design-lock.schema.json",
-  "lockedAt": "2026-08-09T08:25:05.562Z",
+  "lockedAt": "2026-08-23T08:16:39.903Z",
   "lockedBy": "propagate-agents-md@mac-mini",
   "synced": {
     "site-footer": {
-      "manifestSha": "sha256:83260a21ff6646f77b8310e4144b90b76d13bc0a7bae1f4a84c3bd8a5ab7041d",
+      "manifestSha": "sha256:not-installed",
       "consumerPath": "src/components/koydo-footer/",
       "syncScript": "sync-koydo-footer.mjs",
-      "version": "1.5.1"
+      "state": "not-installed",
+      "notes": "src/components/koydo-footer/ does not exist in this repo — nothing is synced here."
     },
     "tokens": {
-      "manifestSha": "sha256:6b863c26d4b2d351e0636db73be1491813c19c4c988b620336ca159e6c9ee384",
+      "manifestSha": "sha256:not-installed",
       "consumerPath": "src/styles/koydo-tokens.css",
       "syncScript": "sync-koydo-design-tokens.mjs",
-      "version": "2025.10.0"
+      "state": "not-installed",
+      "notes": "src/styles/koydo-tokens.css does not exist in this repo — nothing is synced here."
     }
   }
 }
